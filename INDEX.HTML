@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>León Dorado — Joyería de Alta Distinción</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;900&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dark: #8B6914;
+    --obsidian: #0A0804;
+    --dark: #111008;
+    --warm-black: #1A1508;
+    --cream: #F5EDD6;
+    --amber: #B8860B;
+    --fur: #2A1F08;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--obsidian);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CURSOR */
+  .cursor {
+    width: 14px; height: 14px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, background 0.2s;
+  }
+  .cursor-dot {
+    width: 4px; height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+  }
+
+  /* TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; width: 100%;
+    padding: 22px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(10,8,4,0.95), transparent);
+    transition: background 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(10,8,4,0.97);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(245,237,214,0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 40px;
+  }
+
+  /* Animated fur-like radial gradient background */
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139,105,20,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 80% at 80% 20%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(184,134,11,0.1) 0%, transparent 60%),
+      var(--obsidian);
+    animation: heroAura 8s ease-in-out infinite alternate;
+  }
+  @keyframes heroAura {
+    from { opacity: 0.8; transform: scale(1); }
+    to   { opacity: 1;   transform: scale(1.04); }
+  }
+
+  /* Diagonal stripe accents */
+  .hero-stripes {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -55deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(201,168,76,0.025) 60px,
+      rgba(201,168,76,0.025) 62px
+    );
+  }
+
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 1.4s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* LION LOGO SVG */
+  .lion-logo {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 32px;
+    animation: logoGlow 4s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 18px rgba(201,168,76,0.5));
+  }
+  @keyframes logoGlow {
+    from { filter: drop-shadow(0 0 12px rgba(201,168,76,0.4)); }
+    to   { filter: drop-shadow(0 0 32px rgba(201,168,76,0.75)); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 1.4s 0.2s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3.2rem, 8vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: fadeUp 1.4s 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+  .hero-title span {
+    color: var(--gold);
+    -webkit-text-stroke: 0px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--amber));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(245,237,214,0.65);
+    letter-spacing: 0.08em;
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeUp 1.4s 0.6s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 16px 52px;
+    border: 1px solid var(--gold);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s;
+    opacity: 0;
+    animation: fadeUp 1.4s 0.8s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+  .hero-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    z-index: -1;
+  }
+  .hero-cta:hover { color: var(--obsidian); }
+  .hero-cta:hover::before { transform: scaleX(1); }
+
+  /* DIVIDER */
+  .divider {
+    display: flex; align-items: center;
+    gap: 24px;
+    padding: 0 60px;
+    margin: 20px 0;
+    opacity: 0.35;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--gold); }
+  .divider-diamond {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; position: relative; z-index: 1; }
+
+  .section-label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 24px;
+    line-height: 1.1;
+  }
+  .section-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(245,237,214,0.6);
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 60px;
+  }
+
+  /* SERVICES GRID */
+  #servicios { background: var(--warm-black); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .service-card {
+    background: var(--fur);
+    padding: 52px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    cursor: none;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+  }
+  .service-card:hover { transform: translateY(-6px); }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    font-size: 2.2rem;
+    margin-bottom: 28px;
+    display: block;
+  }
+  .service-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .service-card p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(245,237,214,0.55);
+    font-weight: 300;
+  }
+  .service-number {
+    position: absolute;
+    bottom: 24px; right: 32px;
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(201,168,76,0.06);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  /* ABOUT */
+  #nosotros {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+  .about-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--fur);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at center, rgba(201,168,76,0.15) 0%, transparent 70%),
+      repeating-linear-gradient(
+        -45deg,
+        transparent 0, transparent 8px,
+        rgba(201,168,76,0.04) 8px, rgba(201,168,76,0.04) 9px
+      );
+  }
+  .about-frame-inner {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .about-lion-big {
+    width: 200px; opacity: 0.35;
+    filter: drop-shadow(0 0 20px rgba(201,168,76,0.4));
+  }
+  .about-frame-tag {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  .about-accent {
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 120px; height: 120px;
+    border: 1px solid rgba(201,168,76,0.25);
+    z-index: -1;
+  }
+  .about-accent2 {
+    position: absolute;
+    bottom: -20px; left: -20px;
+    width: 80px; height: 80px;
+    border: 1px solid rgba(201,168,76,0.15);
+    z-index: -1;
+  }
+
+  .stat-row {
+    display: flex; gap: 48px; margin-top: 50px;
+  }
+  .stat {
+    border-left: 1px solid rgba(201,168,76,0.3);
+    padding-left: 20px;
+  }
+  .stat-num {
+    font-family: 'Cinzel', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,237,214,0.45);
+    margin-top: 6px;
+  }
+
+  /* COLLECTIONS */
+  #colecciones { background: var(--warm-black); }
+
+  .collection-strip {
+    display: flex;
+    gap: 2px;
+    margin-top: 60px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .collection-strip::-webkit-scrollbar { height: 2px; }
+  .collection-strip::-webkit-scrollbar-track { background: var(--fur); }
+  .collection-strip::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  .col-item {
+    min-width: 260px;
+    aspect-ratio: 3/4;
+    background: var(--fur);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    cursor: none;
+    transition: transform 0.4s ease;
+  }
+  .col-item:hover { transform: scale(1.03); }
+  .col-item-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    opacity: 0.18;
+  }
+  .col-item-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,8,4,0.92) 0%, transparent 60%);
+  }
+  .col-item-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 28px 24px;
+  }
+  .col-item-cat {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .col-item-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--cream);
+  }
+
+  /* PROCESS */
+  #proceso { padding: 100px 60px; }
+  .process-timeline {
+    display: flex;
+    gap: 0;
+    margin-top: 60px;
+    position: relative;
+  }
+  .process-timeline::before {
+    content: '';
+    position: absolute;
+    top: 28px; left: 28px; right: 28px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    z-index: 0;
+  }
+  .process-step {
+    flex: 1;
+    padding: 0 24px;
+    text-align: center;
+    position: relative;
+  }
+  .step-dot {
+    width: 56px; height: 56px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    background: var(--obsidian);
+    position: relative;
+    z-index: 1;
+    transition: background 0.3s, color 0.3s;
+  }
+  .process-step:hover .step-dot {
+    background: var(--gold);
+    color: var(--obsidian);
+  }
+  .step-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+  .step-desc {
+    font-size: 0.9rem;
+    color: rgba(245,237,214,0.45);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* TESTIMONIALS */
+  #testimonios { background: var(--warm-black); }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2px;
+    margin-top: 60px;
+  }
+  .testimonial {
+    background: var(--fur);
+    padding: 44px 40px;
+    position: relative;
+  }
+  .testimonial::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6rem;
+    color: rgba(201,168,76,0.12);
+    position: absolute;
+    top: 10px; left: 28px;
+    line-height: 1;
+  }
+  .testimonial-text {
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: rgba(245,237,214,0.7);
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .author-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    background: var(--obsidian);
+  }
+  .author-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+  }
+  .author-detail {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,237,214,0.35);
+    margin-top: 3px;
+  }
+
+  /* CONTACT */
+  #contacto {
+    text-align: center;
+    padding: 120px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  #contacto::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(139,105,20,0.12) 0%, transparent 70%);
+  }
+  #contacto .section-desc {
+    margin: 0 auto 60px;
+    max-width: 520px;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+  .contact-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 44px 52px;
+    text-decoration: none;
+    border: 1px solid rgba(201,168,76,0.15);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+    min-width: 200px;
+  }
+  .contact-link::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(201,168,76,0.05);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s ease;
+  }
+  .contact-link:hover { border-color: rgba(201,168,76,0.5); }
+  .contact-link:hover::before { transform: scaleY(1); }
+
+  .contact-link-icon { font-size: 1.8rem; position: relative; z-index: 1; }
+  .contact-link-label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    position: relative; z-index: 1;
+  }
+  .contact-link-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: rgba(245,237,214,0.6);
+    position: relative; z-index: 1;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 48px 60px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .footer-copy {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    color: rgba(245,237,214,0.25);
+    text-transform: uppercase;
+  }
+  .footer-socials {
+    display: flex; gap: 20px;
+  }
+  .footer-socials a {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,237,214,0.35);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-socials a:hover { color: var(--gold); }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    overflow: hidden;
+    padding: 28px 0;
+    border-top: 1px solid rgba(201,168,76,0.12);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    background: var(--fur);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+  }
+  .marquee-item {
+    display: flex; align-items: center; gap: 24px;
+    padding: 0 36px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.5);
+    white-space: nowrap;
+  }
+  .marquee-diamond {
+    width: 5px; height: 5px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    opacity: 0.4;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 20px 28px; }
+    .nav-links { display: none; }
+    section { padding: 70px 28px; }
+    #nosotros { grid-template-columns: 1fr; gap: 48px; }
+    .stat-row { gap: 28px; }
+    footer { padding: 36px 28px; }
+    .contact-links { flex-direction: column; align-items: center; }
+    .process-timeline { flex-direction: column; gap: 32px; }
+    .process-timeline::before { display: none; }
+    .hero { padding: 0 24px; }
+    .divider { padding: 0 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">León Dorado</div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#colecciones">Colecciones</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-stripes"></div>
+
+  <div class="hero-content">
+    <!-- LION LOGO SVG -->
+    <svg class="lion-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Mane outer glow rays -->
+      <g opacity="0.6">
+        <line x1="100" y1="100" x2="100" y2="14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="100" y1="100" x2="148" y2="24" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="100" y1="100" x2="182" y2="55" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="100" y1="100" x2="186" y2="100" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="100" y1="100" x2="182" y2="145" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="100" y1="100" x2="148" y2="176" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="100" y1="100" x2="52" y2="24" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="100" y1="100" x2="18" y2="55" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="100" y1="100" x2="14" y2="100" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="100" y1="100" x2="18" y2="145" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="100" y1="100" x2="52" y2="176" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+      </g>
+
+      <!-- Outer crown / mane circle -->
+      <circle cx="100" cy="100" r="68" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+      <circle cx="100" cy="100" r="54" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.25"/>
+
+      <!-- Mane shape -->
+      <ellipse cx="100" cy="103" rx="44" ry="48" fill="#1A1508"/>
+      <ellipse cx="100" cy="103" rx="44" ry="48" fill="url(#maneGrad)"/>
+
+      <!-- Face -->
+      <ellipse cx="100" cy="105" rx="30" ry="33" fill="#2A1F08"/>
+      <ellipse cx="100" cy="105" rx="30" ry="33" fill="url(#faceGrad)"/>
+
+      <!-- Ears -->
+      <ellipse cx="78" cy="78" rx="10" ry="12" fill="#1A1508" transform="rotate(-15 78 78)"/>
+      <ellipse cx="122" cy="78" rx="10" ry="12" fill="#1A1508" transform="rotate(15 122 78)"/>
+      <ellipse cx="78" cy="78" rx="6" ry="7.5" fill="#C9A84C" opacity="0.4" transform="rotate(-15 78 78)"/>
+      <ellipse cx="122" cy="78" rx="6" ry="7.5" fill="#C9A84C" opacity="0.4" transform="rotate(15 122 78)"/>
+
+      <!-- Brow ridge -->
+      <path d="M84 94 Q88 89 94 92" stroke="#8B6914" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path d="M116 94 Q112 89 106 92" stroke="#8B6914" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+      <!-- Eyes -->
+      <ellipse cx="89" cy="99" rx="7" ry="6" fill="#0A0804"/>
+      <ellipse cx="111" cy="99" rx="7" ry="6" fill="#0A0804"/>
+      <ellipse cx="89" cy="99" rx="5" ry="4.5" fill="#C9A84C" opacity="0.85"/>
+      <ellipse cx="111" cy="99" rx="5" ry="4.5" fill="#C9A84C" opacity="0.85"/>
+      <ellipse cx="89" cy="99" rx="3" ry="3.5" fill="#060504"/>
+      <ellipse cx="111" cy="99" rx="3" ry="3.5" fill="#060504"/>
+      <!-- Eye gleam -->
+      <circle cx="91" cy="97.5" r="1.2" fill="white" opacity="0.7"/>
+      <circle cx="113" cy="97.5" r="1.2" fill="white" opacity="0.7"/>
+
+      <!-- Nose bridge -->
+      <rect x="98.5" y="104" width="3" height="6" rx="1.5" fill="#8B6914" opacity="0.5"/>
+
+      <!-- Nose -->
+      <path d="M93 111 Q100 107 107 111 Q100 117 93 111Z" fill="#C9A84C" opacity="0.7"/>
+
+      <!-- Mouth -->
+      <path d="M100 116 Q94 121 90 119" stroke="#8B6914" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M100 116 Q106 121 110 119" stroke="#8B6914" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+      <!-- Crown jewel on forehead -->
+      <polygon points="100,74 103,80 100,78 97,80" fill="#E8C96A" opacity="0.9"/>
+      <circle cx="100" cy="73" r="3.5" fill="#C9A84C"/>
+      <circle cx="100" cy="73" r="2" fill="#E8C96A" opacity="0.9"/>
+
+      <!-- Necklace gems -->
+      <circle cx="82" cy="134" r="3" fill="#C9A84C" opacity="0.8"/>
+      <circle cx="91" cy="137" r="2.5" fill="#E8C96A" opacity="0.7"/>
+      <circle cx="100" cy="138" r="3.5" fill="#C9A84C"/>
+      <circle cx="109" cy="137" r="2.5" fill="#E8C96A" opacity="0.7"/>
+      <circle cx="118" cy="134" r="3" fill="#C9A84C" opacity="0.8"/>
+      <path d="M82 134 Q91 138 100 138 Q109 138 118 134" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.5"/>
+
+      <!-- Gradients -->
+      <defs>
+        <radialGradient id="maneGrad" cx="50%" cy="45%" r="60%">
+          <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.45"/>
+          <stop offset="100%" stop-color="#1A1508" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="faceGrad" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#5A3D10" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#2A1F08" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+    </svg>
+
+    <p class="hero-eyebrow">Joyería de Alta Distinción</p>
+    <h1 class="hero-title">LEÓN<br><span>DORADO</span></h1>
+    <p class="hero-subtitle">Donde el instinto salvaje se convierte en arte eterno</p>
+    <a href="#servicios" class="hero-cta">Descubrir Servicios</a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Diseño Exclusivo <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Oro 18K & 24K <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Diamantes Certificados <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Joyería Animalista <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Grabados Personalizados <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Piedras Preciosas <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Restauración & Retoque <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Diseño Exclusivo <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Oro 18K & 24K <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Diamantes Certificados <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Joyería Animalista <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Grabados Personalizados <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Piedras Preciosas <span class="marquee-diamond"></span></span>
+    <span class="marquee-item">Restauración & Retoque <span class="marquee-diamond"></span></span>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="reveal">
+    <p class="section-label">Nuestras Especialidades</p>
+    <h2 class="section-title">Servicios de<br>Alta Joyería</h2>
+    <p class="section-desc">Cada pieza es creada con la fiereza y precisión de un depredador en su máximo esplendor.</p>
+  </div>
+
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <span class="service-icon">🦁</span>
+      <h3>Diseño Personalizado</h3>
+      <p>Transformamos tus ideas en joyas únicas. Desde bocetos hasta la pieza final, nuestros artesanos trabajan contigo para crear algo verdaderamente tuyo.</p>
+      <span class="service-number">01</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💎</span>
+      <h3>Anillos & Sortijas</h3>
+      <p>Anillos de compromiso, matrimonio y celebración. Diseños con motivos animales, diamantes y piedras preciosas en oro 18K y 24K.</p>
+      <span class="service-number">02</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🐯</span>
+      <h3>Cadenas & Collares</h3>
+      <p>Cadenas artesanales con dìjes inspirados en el reino animal. Diseños que evocan la fuerza, elegancia y salvajismo de la naturaleza.</p>
+      <span class="service-number">03</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🦅</span>
+      <h3>Pulseras & Brazaletes</h3>
+      <p>Colecciones que capturan la esencia de las criaturas más majestuosas del mundo. Desde serpientes entrelazadas hasta alas de águila.</p>
+      <span class="service-number">04</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">✦</span>
+      <h3>Grabados & Personalizaciones</h3>
+      <p>Inscripciones, fechas, nombres y símbolos grabados con láser o a mano. Convierte cualquier joya en un recuerdo imperecedero.</p>
+      <span class="service-number">05</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🔧</span>
+      <h3>Restauración & Limpieza</h3>
+      <p>Devolvemos la vida a tus joyas más preciadas. Reparación de piezas dañadas, pulido profesional y mantenimiento especializado.</p>
+      <span class="service-number">06</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-diamond"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="about-visual reveal">
+    <div class="about-frame">
+      <div class="about-frame-inner">
+        <!-- Repeat lion silhouette large -->
+        <svg class="about-lion-big" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <g opacity="0.5">
+            <line x1="100" y1="100" x2="100" y2="14" stroke="#C9A84C" stroke-width="2"/>
+            <line x1="100" y1="100" x2="148" y2="24" stroke="#C9A84C" stroke-width="1.5"/>
+            <line x1="100" y1="100" x2="182" y2="55" stroke="#C9A84C" stroke-width="1.5"/>
+            <line x1="100" y1="100" x2="186" y2="100" stroke="#C9A84C" stroke-width="2"/>
+            <line x1="100" y1="100" x2="182" y2="145" stroke="#C9A84C" stroke-width="1.5"/>
+            <line x1="100" y1="100" x2="52" y2="24" stroke="#C9A84C" stroke-width="1.5"/>
+            <line x1="100" y1="100" x2="18" y2="55" stroke="#C9A84C" stroke-width="1.5"/>
+            <line x1="100" y1="100" x2="14" y2="100" stroke="#C9A84C" stroke-width="2"/>
+            <line x1="100" y1="100" x2="18" y2="145" stroke="#C9A84C" stroke-width="1.5"/>
+          </g>
+          <circle cx="100" cy="100" r="68" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.4"/>
+          <ellipse cx="100" cy="103" rx="44" ry="48" fill="#C9A84C" opacity="0.15"/>
+          <ellipse cx="100" cy="105" rx="30" ry="33" fill="#C9A84C" opacity="0.12"/>
+          <ellipse cx="89" cy="99" rx="7" ry="6" fill="#C9A84C" opacity="0.5"/>
+          <ellipse cx="111" cy="99" rx="7" ry="6" fill="#C9A84C" opacity="0.5"/>
+          <path d="M93 111 Q100 107 107 111 Q100 117 93 111Z" fill="#C9A84C" opacity="0.6"/>
+          <polygon points="100,74 103,80 100,78 97,80" fill="#E8C96A" opacity="0.8"/>
+          <circle cx="100" cy="73" r="3.5" fill="#C9A84C" opacity="0.9"/>
+        </svg>
+        <span class="about-frame-tag">Artesanía · Pasión · Fiereza</span>
+      </div>
+    </div>
+    <div class="about-accent"></div>
+    <div class="about-accent2"></div>
+  </div>
+
+  <div class="about-text reveal">
+    <p class="section-label">Nuestra Historia</p>
+    <h2 class="section-title">El Rugido<br>de la Excelencia</h2>
+    <p class="section-desc">
+      Somos una joyería con alma salvaje y manos de artesano. Cada pieza que creamos lleva el espíritu indomable de los grandes felinos: precisión, fuerza y elegancia inigualable. Más de una década forjando sueños en oro.
+    </p>
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-num">12+</span>
+        <span class="stat-label">Años de experiencia</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2K+</span>
+        <span class="stat-label">Piezas creadas</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Garantía artesanal</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLECCIONES -->
+<section id="colecciones">
+  <div class="reveal">
+    <p class="section-label">Líneas de Producto</p>
+    <h2 class="section-title">Nuestras<br>Colecciones</h2>
+    <p class="section-desc">Inspiradas en el instinto, la naturaleza y el poder de los animales más majestuosos del planeta.</p>
+  </div>
+
+  <div class="collection-strip reveal">
+    <div class="col-item">
+      <div class="col-item-bg">🦁</div>
+      <div class="col-item-overlay"></div>
+      <div class="col-item-info">
+        <p class="col-item-cat">Colección Felinos</p>
+        <h3 class="col-item-name">Línea León Real</h3>
+      </div>
+    </div>
+    <div class="col-item">
+      <div class="col-item-bg">🐍</div>
+      <div class="col-item-overlay"></div>
+      <div class="col-item-info">
+        <p class="col-item-cat">Colección Reptiles</p>
+        <h3 class="col-item-name">Serpiente Áurea</h3>
+      </div>
+    </div>
+    <div class="col-item">
+      <div class="col-item-bg">🦅</div>
+      <div class="col-item-overlay"></div>
+      <div class="col-item-info">
+        <p class="col-item-cat">Colección Aves</p>
+        <h3 class="col-item-name">Vuelo del Águila</h3>
+      </div>
+    </div>
+    <div class="col-item">
+      <div class="col-item-bg">🐺</div>
+      <div class="col-item-overlay"></div>
+      <div class="col-item-info">
+        <p class="col-item-cat">Colección Cánidos</p>
+        <h3 class="col-item-name">Manada Salvaje</h3>
+      </div>
+    </div>
+    <div class="col-item">
+      <div class="col-item-bg">🦋</div>
+      <div class="col-item-overlay"></div>
+      <div class="col-item-info">
+        <p class="col-item-cat">Colección Mariposas</p>
+        <h3 class="col-item-name">Metamorfosis Dorada</h3>
+      </div>
+    </div>
+    <div class="col-item">
+      <div class="col-item-bg">🐉</div>
+      <div class="col-item-overlay"></div>
+      <div class="col-item-info">
+        <p class="col-item-cat">Edición Legendaria</p>
+        <h3 class="col-item-name">Dragón Imperial</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="reveal" style="text-align:center;">
+    <p class="section-label">Cómo Trabajamos</p>
+    <h2 class="section-title">Del Concepto<br>a la Joya</h2>
+    <p class="section-desc" style="margin: 0 auto 0;">Cada creación sigue un ritual sagrado de precisión artesanal.</p>
+  </div>
+
+  <div class="process-timeline reveal">
+    <div class="process-step">
+      <div class="step-dot">I</div>
+      <h3 class="step-title">Consulta</h3>
+      <p class="step-desc">Conversamos sobre tu visión, preferencias y el animal que te inspira.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">II</div>
+      <h3 class="step-title">Diseño</h3>
+      <p class="step-desc">Nuestros artistas crean bocetos exclusivos hasta capturar tu esencia.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">III</div>
+      <h3 class="step-title">Fundición</h3>
+      <p class="step-desc">El metal precioso es fundido y moldeado con técnicas ancestrales.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">IV</div>
+      <h3 class="step-title">Engaste</h3>
+      <p class="step-desc">Diamantes y piedras preciosas son fijados con precisión milimétrica.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">V</div>
+      <h3 class="step-title">Entrega</h3>
+      <p class="step-desc">Tu joya llega con certificado de autenticidad y garantía artesanal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="reveal">
+    <p class="section-label">Clientes</p>
+    <h2 class="section-title">Lo Que Dicen<br>de Nosotros</h2>
+  </div>
+  <div class="testimonial-grid reveal">
+    <div class="testimonial">
+      <p class="testimonial-text">El anillo de compromiso que diseñaron superó todas mis expectativas. El motivo del león con el diamante central es simplemente majestuoso.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">🦁</div>
+        <div>
+          <div class="author-name">Alejandro M.</div>
+          <div class="author-detail">Cliente Premium · Medellín</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">La cadena con el dije de serpiente que encargué es una obra de arte. Recibo halagos cada vez que la llevo puesta. Trabajo impecable.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">🐍</div>
+        <div>
+          <div class="author-name">Valentina R.</div>
+          <div class="author-detail">Coleccionista · Bogotá</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">Llevé una joya vieja de mi abuela para restaurar y quedé sin palabras. La dejaron como nueva, con todo el detalle original preservado.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">✨</div>
+        <div>
+          <div class="author-name">Carolina V.</div>
+          <div class="author-detail">Cliente Fiel · Envigado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-diamond"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div style="position:relative;z-index:1;">
+    <p class="section-label reveal">Hablemos</p>
+    <h2 class="section-title reveal">Contacta al<br>León Dorado</h2>
+    <p class="section-desc reveal">Estamos listos para hacer realidad la joya que siempre soñaste. Contáctanos por cualquiera de estos canales.</p>
+
+    <div class="contact-links reveal">
+      <a href="mailto:marlondavid22vallejo@hotmail.com" class="contact-link">
+        <span class="contact-link-icon">✉️</span>
+        <span class="contact-link-label">Correo Electrónico</span>
+        <span class="contact-link-value">marlondavid22vallejo<br>@hotmail.com</span>
+      </a>
+      <a href="tel:+573102469772" class="contact-link">
+        <span class="contact-link-icon">📞</span>
+        <span class="contact-link-label">Teléfono / WhatsApp</span>
+        <span class="contact-link-value">+57 310 246 9772</span>
+      </a>
+      <a href="https://www.instagram.com/marlonvallejo1_" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-icon">📸</span>
+        <span class="contact-link-label">Instagram</span>
+        <span class="contact-link-value">@marlonvallejo1_</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">León Dorado — Joyería</div>
+  <div class="footer-copy">© 2025 León Dorado. Todos los derechos reservados.</div>
+  <div class="footer-socials">
+    <a href="mailto:marlondavid22vallejo@hotmail.com">Email</a>
+    <a href="tel:+573102469772">Teléfono</a>
+    <a href="https://www.instagram.com/marlonvallejo1_" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const cursorDot = document.getElementById('cursorDot');
+  let mx = 0, my = 0, cx = 0, cy = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursorDot.style.left = mx + 'px';
+    cursorDot.style.top = my + 'px';
+  });
+
+  (function animCursor() {
+    cx += (mx - cx) * 0.12;
+    cy += (my - cy) * 0.12;
+    cursor.style.left = cx + 'px';
+    cursor.style.top = cy + 'px';
+    requestAnimationFrame(animCursor);
+  })();
+
+  document.querySelectorAll('a, button, .service-card, .col-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2.2)';
+      cursor.style.background = 'rgba(201,168,76,0.15)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      cursor.style.background = 'transparent';
+    });
+  });
+
+  // Scroll nav
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
